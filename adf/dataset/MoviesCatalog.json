@@ -1,0 +1,13 @@
+{
+	"name": "MoviesCatalog",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedsvc_cosmosdb_movies",
+			"type": "LinkedServiceReference"
+		},
+		"type": "DocumentDbCollection",
+		"typeProperties": {
+			"collectionName": "movies"
+		}
+	}
+}
