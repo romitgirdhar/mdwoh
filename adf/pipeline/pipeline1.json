@@ -13,8 +13,27 @@
 					"secureInput": false
 				},
 				"typeProperties": {
+					"source": {
+						"type": "DocumentDbCollectionSource",
+						"nestingSeparator": "."
+					},
+					"sink": {
+						"type": "AzureBlobFSSink"
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "MoviesCatalog",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Movies",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		]
 	}
