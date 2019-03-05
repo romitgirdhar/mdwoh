@@ -8,7 +8,13 @@
 		"type": "AzureBlobFSFile",
 		"typeProperties": {
 			"format": {
-				"type": "ParquetFormat"
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": false
 			},
 			"fileName": "",
 			"folderPath": "southbridgeraw/orders"
