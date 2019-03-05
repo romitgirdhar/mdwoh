@@ -44,7 +44,8 @@
 				"type": "String"
 			},
 			{
-				"name": "actors"
+				"name": "actors",
+				"type": "Object"
 			}
 		],
 		"typeProperties": {
