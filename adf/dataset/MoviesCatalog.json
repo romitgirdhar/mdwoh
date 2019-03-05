@@ -1,0 +1,54 @@
+{
+	"name": "MoviesCatalog",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedsvc_cosmosdb_movies",
+			"type": "LinkedServiceReference"
+		},
+		"type": "DocumentDbCollection",
+		"structure": [
+			{
+				"name": "availabilityDate",
+				"type": "String"
+			},
+			{
+				"name": "genre",
+				"type": "String"
+			},
+			{
+				"name": "rating",
+				"type": "String"
+			},
+			{
+				"name": "releaseYear",
+				"type": "Int64"
+			},
+			{
+				"name": "runtime",
+				"type": "Int64"
+			},
+			{
+				"name": "streamingAvailabilityDate",
+				"type": "String"
+			},
+			{
+				"name": "tier",
+				"type": "Int64"
+			},
+			{
+				"name": "title",
+				"type": "String"
+			},
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "actors"
+			}
+		],
+		"typeProperties": {
+			"collectionName": "movies"
+		}
+	}
+}
