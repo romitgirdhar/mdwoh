@@ -1,0 +1,47 @@
+{
+	"name": "southridge_orderdetails",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "southridge_linked_svc",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "OrderDetailID",
+				"type": "Guid"
+			},
+			{
+				"name": "OrderID",
+				"type": "Guid"
+			},
+			{
+				"name": "MovieID",
+				"type": "Guid"
+			},
+			{
+				"name": "Quantity",
+				"type": "Byte"
+			},
+			{
+				"name": "UnitCost",
+				"type": "Decimal"
+			},
+			{
+				"name": "LineNumber",
+				"type": "Byte"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "Date"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "Date"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[Hidden].[OrderDetails]"
+		}
+	}
+}
