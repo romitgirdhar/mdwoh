@@ -9,8 +9,7 @@
 		"typeProperties": {
 			"format": {
 				"type": "JsonFormat",
-				"filePattern": "setOfObjects",
-				"jsonNodeReference": "/actors"
+				"filePattern": "setOfObjects"
 			},
 			"fileName": "movies.json",
 			"folderPath": "southbridgeraw/movies"
