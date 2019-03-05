@@ -1,0 +1,19 @@
+{
+	"name": "Movies",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedsvc_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonNodeReference": "/actors"
+			},
+			"fileName": "",
+			"folderPath": "southbridgeraw/movies"
+		}
+	}
+}
