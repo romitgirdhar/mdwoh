@@ -45,7 +45,7 @@
 			},
 			{
 				"name": "actors",
-				"type": "Object"
+				"type": "String"
 			}
 		],
 		"typeProperties": {
