@@ -1,0 +1,7 @@
+{
+	"name": "VanderSelfHostedIRV2",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "Version2 of SelfHostedIR"
+	}
+}
