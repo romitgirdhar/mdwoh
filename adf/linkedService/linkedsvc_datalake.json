@@ -1,0 +1,10 @@
+{
+	"name": "linkedsvc_datalake",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://adlg2team4southridge.dfs.core.windows.net"
+		}
+	}
+}
