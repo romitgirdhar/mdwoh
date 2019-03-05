@@ -1,0 +1,11 @@
+{
+	"name": "linkedsvc_cosmosdb_movies",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "CosmosDb",
+		"typeProperties": {
+			"connectionString": "AccountEndpoint=https://southridge-catalog-oxvhjeutdnkdo.documents.azure.com:443/;Database=southridge;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNPVVRIUklER0VFVExfZDdlNDg2MjQtNzUxZC00YTI5LTlhYTYtZWMxMWU4NWI1ZTg5Ig0KfQ=="
+		}
+	}
+}
