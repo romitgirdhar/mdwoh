@@ -1,0 +1,137 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name"
+		},
+		"southridge_linked_svc": {
+			"type": "string"
+		},
+		"linkedsvc_datalake": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/sqlpipe-southridge')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"typeProperties": {
+							"source": {
+								"type": "SqlSource"
+							},
+							"sink": {
+								"type": "AzureBlobFSSink",
+								"copyBehavior": "PreserveHierarchy"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "southridge_cs_orders",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ADLS_southridge_orders",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/southridge_cs_orders')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_southridge_orders')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_cs_orders')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('southridge_linked_svc')]",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "OrderID",
+						"type": "Guid"
+					},
+					{
+						"name": "CustomerID",
+						"type": "Guid"
+					},
+					{
+						"name": "OrderDate",
+						"type": "Date"
+					},
+					{
+						"name": "ShipDate",
+						"type": "Date"
+					},
+					{
+						"name": "TotalCost",
+						"type": "Decimal"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "Date"
+					},
+					{
+						"name": "UpdatedDate",
+						"type": "Date"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[Orders]')]"
+				}
+			}
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_southridge_orders')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('linkedsvc_datalake')]",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "",
+					"folderPath": "southbridgeraw/orders"
+				}
+			}
+		}
+	]
+}
