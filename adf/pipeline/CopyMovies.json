@@ -1,6 +1,7 @@
 {
-	"name": "RomitIsAPITA",
+	"name": "CopyMovies",
 	"properties": {
+		"description": "Copy movie catalog from CosmosDB to ADLS",
 		"activities": [
 			{
 				"name": "Copy movie catalog",
