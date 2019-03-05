@@ -1,0 +1,43 @@
+{
+	"name": "streaming_transaction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "southridge_streaming",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "TransactionID",
+				"type": "Guid"
+			},
+			{
+				"name": "CustomerID",
+				"type": "Guid"
+			},
+			{
+				"name": "MovieID",
+				"type": "Guid"
+			},
+			{
+				"name": "StreamStart",
+				"type": "DateTime"
+			},
+			{
+				"name": "StreamEnd",
+				"type": "DateTime"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "Date"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "Date"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Transactions]"
+		}
+	}
+}
