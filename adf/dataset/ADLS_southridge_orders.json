@@ -7,6 +7,9 @@
 		},
 		"type": "AzureBlobFSFile",
 		"typeProperties": {
+			"format": {
+				"type": "ParquetFormat"
+			},
 			"fileName": "",
 			"folderPath": "southbridgeraw/orders"
 		}
