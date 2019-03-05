@@ -1,5 +1,5 @@
 {
-	"name": "sqlpipeline-customers",
+	"name": "sqlpipeline-copy",
 	"properties": {
 		"activities": [
 			{
