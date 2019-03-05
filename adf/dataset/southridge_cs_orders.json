@@ -1,0 +1,43 @@
+{
+	"name": "southridge_cs_orders",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "southridge_linked_svc",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "OrderID",
+				"type": "Guid"
+			},
+			{
+				"name": "CustomerID",
+				"type": "Guid"
+			},
+			{
+				"name": "OrderDate",
+				"type": "Date"
+			},
+			{
+				"name": "ShipDate",
+				"type": "Date"
+			},
+			{
+				"name": "TotalCost",
+				"type": "Decimal"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "Date"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "Date"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Orders]"
+		}
+	}
+}
