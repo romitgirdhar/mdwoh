@@ -12,7 +12,7 @@
 				"filePattern": "setOfObjects",
 				"jsonNodeReference": "/actors"
 			},
-			"fileName": "",
+			"fileName": "movies.json",
 			"folderPath": "southbridgeraw/movies"
 		}
 	}
