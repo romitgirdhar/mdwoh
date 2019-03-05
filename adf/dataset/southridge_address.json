@@ -1,0 +1,51 @@
+{
+	"name": "southridge_address",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "southridge_linked_svc",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "AddressID",
+				"type": "Guid"
+			},
+			{
+				"name": "CustomerID",
+				"type": "Guid"
+			},
+			{
+				"name": "AddressLine1",
+				"type": "String"
+			},
+			{
+				"name": "AddressLine2",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "ZipCode",
+				"type": "String"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "Date"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "Date"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Addresses]"
+		}
+	}
+}
