@@ -1,0 +1,39 @@
+{
+	"name": "southridge_customers",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "southridge_linked_svc",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "CustomerID",
+				"type": "Guid"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "PhoneNumber",
+				"type": "String"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "Date"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "Date"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Customers]"
+		}
+	}
+}
