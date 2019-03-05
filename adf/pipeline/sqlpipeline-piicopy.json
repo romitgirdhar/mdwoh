@@ -1,5 +1,5 @@
 {
-	"name": "sqlpipeline-copy",
+	"name": "sqlpipeline-piicopy",
 	"properties": {
 		"activities": [
 			{
@@ -30,6 +30,38 @@
 				"outputs": [
 					{
 						"referenceName": "ADLS_Customerdetails",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "copydata_address",
+				"type": "Copy",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource"
+					},
+					"sink": {
+						"type": "AzureBlobFSSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "southridge_address",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "adls_address",
 						"type": "DatasetReference"
 					}
 				]
