@@ -1,5 +1,5 @@
 {
-	"name": "southbridge-copymoviecatalog",
+	"name": "southridge-copymoviecatalog",
 	"properties": {
 		"description": "Copy movie catalog from CosmosDB to ADLS",
 		"activities": [

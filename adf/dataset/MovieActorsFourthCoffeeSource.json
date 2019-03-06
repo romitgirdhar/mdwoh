@@ -5,6 +5,9 @@
 			"referenceName": "FourthCoffeeLS",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "fourthcoffee"
+		},
 		"type": "FileShare",
 		"structure": [
 			{

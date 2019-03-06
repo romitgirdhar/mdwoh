@@ -5,6 +5,9 @@
 			"referenceName": "VanderSQL",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "vander"
+		},
 		"type": "SqlServerTable",
 		"typeProperties": {
 			"tableName": "[dbo].[Actors]"

@@ -5,6 +5,9 @@
 			"referenceName": "southridge_streaming",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "southridge"
+		},
 		"type": "AzureSqlTable",
 		"structure": [
 			{

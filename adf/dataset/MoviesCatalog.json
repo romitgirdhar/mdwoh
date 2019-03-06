@@ -5,6 +5,9 @@
 			"referenceName": "linkedsvc_cosmosdb_movies",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "southridge"
+		},
 		"type": "DocumentDbCollection",
 		"typeProperties": {
 			"collectionName": "movies"

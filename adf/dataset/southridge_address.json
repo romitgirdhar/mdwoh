@@ -5,6 +5,9 @@
 			"referenceName": "southridge_linked_svc",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "southridge"
+		},
 		"type": "AzureSqlTable",
 		"structure": [
 			{
