@@ -1,5 +1,5 @@
 {
-	"name": "streaming-pipeline",
+	"name": "southbridge-copystreaming",
 	"properties": {
 		"activities": [
 			{
