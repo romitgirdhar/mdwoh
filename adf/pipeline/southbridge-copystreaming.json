@@ -1,9 +1,9 @@
 {
-	"name": "sqlpipeline-piicopy",
+	"name": "southbridge-copystreaming",
 	"properties": {
 		"activities": [
 			{
-				"name": "copydatacustomerdetails",
+				"name": "copy_str_address",
 				"type": "Copy",
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -23,19 +23,19 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "southridge_customers",
+						"referenceName": "streaming_address",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ADLS_Customerdetails",
+						"referenceName": "adls_str_address",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "copydata_address",
+				"name": "copy_str_customer",
 				"type": "Copy",
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -55,13 +55,45 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "southridge_address",
+						"referenceName": "streaming_customers",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "adls_address",
+						"referenceName": "adls_str_customers",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "copy_str_transaction",
+				"type": "Copy",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource"
+					},
+					"sink": {
+						"type": "AzureBlobFSSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "streaming_transaction",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "adls_str_transactions",
 						"type": "DatasetReference"
 					}
 				]
