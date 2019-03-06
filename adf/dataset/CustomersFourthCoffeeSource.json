@@ -8,15 +8,47 @@
 		"type": "FileShare",
 		"structure": [
 			{
-				"name": "ActorID",
+				"name": "CustomerID",
 				"type": "String"
 			},
 			{
-				"name": "ActorName",
+				"name": "LastName",
 				"type": "String"
 			},
 			{
-				"name": "Gender",
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "AddressLine1",
+				"type": "String"
+			},
+			{
+				"name": "AddressLine2",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "ZipCode",
+				"type": "String"
+			},
+			{
+				"name": "PhoneNumber",
+				"type": "String"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "String"
+			},
+			{
+				"name": "UpdatedDate",
 				"type": "String"
 			}
 		],
