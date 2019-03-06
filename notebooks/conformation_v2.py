@@ -134,3 +134,32 @@ conform_orderdetails.write.saveAsTable("c_orderdetails", format='parquet', mode=
 
 # COMMAND ----------
 
+from pyspark.sql.functions import lit, col
+from pyspark.sql.types import *
+import uuid
+
+#load southridge orders
+sr_address = spark.read.format("csv").options(inferSchema='true', header='true').load("/mnt/raw/addresses")
+#sr_address = sr_address.withColumn("OriginSystem", lit("southridge"))
+
+
+sr_customers = spark.read.format("csv").options(inferSchema='true', header='true').load("/mnt/raw/customer details")
+sr_customers = sr_customers.withColumn("OriginSystem", lit("southridge"))
+
+vander_cust = spark.read.format("csv").options(inferSchema='true', header='true').load("/mnt/raw/raw/vander/Customers")
+vander_customers = vander_cust.select("CustomerID", "LastName", "FirstName", "PhoneNumber" , "CreatedDate", "UpdatedDate").withColumn("OriginSystem", lit("vander"))
+
+fc_cust = spark.read.format("csv").options(inferSchema='true', header='true').load("/mnt/raw/raw/four coffee/customers")
+fc_customers = fc_cust.select("CustomerID", "LastName", "FirstName", "PhoneNumber" , "CreatedDate", "UpdatedDate").withColumn("OriginSystem", lit("fourth_coffee"))
+
+
+uuidUdf = udf(lambda : str(uuid.uuid4()), StringType())
+
+vander_address = vander_cust.select(uuidUdf().alias("AddressID"), "CustomerID", "AddressLine1", "AddressLine2","City","State","ZipCode","CreatedDate","UpdatedDate" )
+fc_address = fc_cust.select(uuidUdf().alias("AddressID"), "CustomerID", "AddressLine1", "AddressLine2","City","State","ZipCode","CreatedDate","UpdatedDate" )
+
+conform_customers=sr_customers.union(vander_customers).union(fc_customers)
+conform_address = sr_address.union(vander_address).union(fc_address)
+
+conform_customers.write.saveAsTable("c_customers", format='parquet', mode='overwrite', path='/mnt/conformed/customers' )
+conform_address.write.saveAsTable("c_address", format='parquet', mode='overwrite', path='/mnt/conformed/addresses' )
