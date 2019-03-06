@@ -1,0 +1,38 @@
+{
+	"name": "MovieActorsFourthCoffeeSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FourthCoffeeLS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "FileShare",
+		"structure": [
+			{
+				"name": "ActorID",
+				"type": "String"
+			},
+			{
+				"name": "ActorName",
+				"type": "String"
+			},
+			{
+				"name": "Gender",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"quoteChar": "\"",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "MovieActors.csv"
+		}
+	}
+}
