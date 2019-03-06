@@ -1,0 +1,13 @@
+{
+	"name": "VanderSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VanderSQL",
+			"type": "LinkedServiceReference"
+		},
+		"type": "SqlServerTable",
+		"typeProperties": {
+			"tableName": "[dbo].[Actors]"
+		}
+	}
+}
