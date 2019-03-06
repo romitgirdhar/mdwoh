@@ -1,0 +1,66 @@
+{
+	"name": "TransactionsFourthCoffeeSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FourthCoffeeLS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "FileShare",
+		"structure": [
+			{
+				"name": "TransactionID",
+				"type": "String"
+			},
+			{
+				"name": "CustomerID",
+				"type": "String"
+			},
+			{
+				"name": "MovieID",
+				"type": "String"
+			},
+			{
+				"name": "RentalDate",
+				"type": "String"
+			},
+			{
+				"name": "ReturnDate",
+				"type": "String"
+			},
+			{
+				"name": "RentalCost",
+				"type": "String"
+			},
+			{
+				"name": "LateFee",
+				"type": "String"
+			},
+			{
+				"name": "RewindFlag",
+				"type": "String"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "String"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"quoteChar": "\"",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "Transactions.csv"
+		}
+	}
+}

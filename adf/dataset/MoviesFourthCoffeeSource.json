@@ -1,0 +1,50 @@
+{
+	"name": "MoviesFourthCoffeeSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FourthCoffeeLS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "FileShare",
+		"structure": [
+			{
+				"name": "MovieID",
+				"type": "String"
+			},
+			{
+				"name": "MovieTitle",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "Rating",
+				"type": "String"
+			},
+			{
+				"name": "RunTimeMin",
+				"type": "String"
+			},
+			{
+				"name": "ReleaseDate",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"quoteChar": "\"",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "Movies.csv"
+		}
+	}
+}

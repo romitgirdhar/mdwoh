@@ -1,0 +1,34 @@
+{
+	"name": "OnlineMovieMappingsFourthCoffeeSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FourthCoffeeLS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "FileShare",
+		"structure": [
+			{
+				"name": "MovieID",
+				"type": "String"
+			},
+			{
+				"name": "OnlineMovieID",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"quoteChar": "\"",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "OnlineMovieMappings.csv"
+		}
+	}
+}

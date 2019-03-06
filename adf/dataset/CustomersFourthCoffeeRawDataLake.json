@@ -1,5 +1,5 @@
 {
-	"name": "adls_address",
+	"name": "CustomersFourthCoffeeRawDataLake",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linkedsvc_datalake",
@@ -17,7 +17,7 @@
 				"firstRowAsHeader": true
 			},
 			"fileName": "",
-			"folderPath": "southbridgeraw/addresses"
+			"folderPath": "southbridgeraw/raw/four coffee/customers"
 		}
 	}
 }
