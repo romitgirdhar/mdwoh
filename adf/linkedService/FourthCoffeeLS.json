@@ -4,9 +4,9 @@
 	"properties": {
 		"type": "FileServer",
 		"typeProperties": {
-			"host": "C:\\Rentals\\*",
+			"host": "C:\\Rentals\\",
 			"userId": "openhackadmin",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2OWFkZmMzZS0xMWMzLTQ4OWMtOTVkYy0yMGUzOTcyOGMzMzEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxYTc5NjE5ZC1mYWIxLTRlMDItOTgxMS1jZDllMThjOTVlNTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "FourthCoffeeIR",
