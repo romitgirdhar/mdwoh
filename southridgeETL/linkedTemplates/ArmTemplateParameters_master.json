@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "southridgeETL"
+		},
+		"VanderSQL_connectionString": {
+			"value": ""
+		},
+		"linkedsvc_cosmosdb_movies_connectionString": {
+			"value": ""
+		},
+		"southridge_linked_svc_connectionString": {
+			"value": ""
+		},
+		"southridge_streaming_connectionString": {
+			"value": ""
+		},
+		"ADLS_Customerdetails_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"ADLS_Customerdetails_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/customer details"
+		},
+		"ADLS_southridge_orders_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"ADLS_southridge_orders_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/orders"
+		},
+		"Movies_properties_typeProperties_fileName": {
+			"value": "movies.json"
+		},
+		"Movies_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/movies"
+		},
+		"adls_address_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"adls_address_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/Addresses"
+		},
+		"adls_orderdetails_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"adls_orderdetails_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/order details"
+		},
+		"adls_str_address_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"adls_str_address_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/stream addresses"
+		},
+		"adls_str_customers_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"adls_str_customers_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/stream customers"
+		},
+		"adls_str_transactions_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"adls_str_transactions_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/stream transactions"
+		},
+		"adls_vander_properties_typeProperties_fileName": {
+			"value": "@dataset().DWTableName"
+		},
+		"adls_vander_properties_typeProperties_folderPath": {
+			"value": "southbridgeraw/raw/vander"
+		},
+		"linkedsvc_datalake_properties_typeProperties_url": {
+			"value": "https://adlg2team4southridge.dfs.core.windows.net"
+		}
+	}
+}

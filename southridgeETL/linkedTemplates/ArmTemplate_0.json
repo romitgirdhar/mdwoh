@@ -1,0 +1,710 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "southridgeETL"
+		},
+		"linkedsvc_cosmosdb_movies_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedsvc_cosmosdb_movies'"
+		},
+		"southridge_linked_svc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'southridge_linked_svc'"
+		},
+		"southridge_streaming_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'southridge_streaming'"
+		},
+		"linkedsvc_datalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlg2team4southridge.dfs.core.windows.net"
+		},
+		"ADLS_Customerdetails_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"ADLS_Customerdetails_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/customer details"
+		},
+		"ADLS_southridge_orders_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"ADLS_southridge_orders_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/orders"
+		},
+		"Movies_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "movies.json"
+		},
+		"Movies_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/movies"
+		},
+		"adls_address_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_address_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/Addresses"
+		},
+		"adls_orderdetails_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_orderdetails_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/order details"
+		},
+		"adls_str_address_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_str_address_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/stream addresses"
+		},
+		"adls_str_customers_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_str_customers_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/stream customers"
+		},
+		"adls_str_transactions_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_str_transactions_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/stream transactions"
+		},
+		"adls_vander_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().DWTableName"
+		},
+		"adls_vander_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/raw/vander"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedsvc_cosmosdb_movies')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "CosmosDb",
+				"typeProperties": {
+					"connectionString": "[parameters('linkedsvc_cosmosdb_movies_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedsvc_datalake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedsvc_datalake_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_linked_svc')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('southridge_linked_svc_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_streaming')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('southridge_streaming_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/VanderSelfHostedIRV2')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"description": "Version2 of SelfHostedIR",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_Customerdetails')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('ADLS_Customerdetails_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('ADLS_Customerdetails_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_southridge_orders')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('ADLS_southridge_orders_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('ADLS_southridge_orders_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Movies')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "JsonFormat",
+						"filePattern": "setOfObjects"
+					},
+					"fileName": "[parameters('Movies_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('Movies_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MoviesCatalog')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_cosmosdb_movies",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DocumentDbCollection",
+				"typeProperties": {
+					"collectionName": "movies"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_cosmosdb_movies')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_address')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('adls_address_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('adls_address_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_orderdetails')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('adls_orderdetails_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('adls_orderdetails_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_str_address')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('adls_str_address_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('adls_str_address_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_str_customers')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('adls_str_customers_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('adls_str_customers_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_str_transactions')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "[parameters('adls_str_transactions_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('adls_str_transactions_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adls_vander')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedsvc_datalake",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"DWTableName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "",
+						"nullValue": "\\N",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0
+					},
+					"fileName": {
+						"value": "[parameters('adls_vander_properties_typeProperties_fileName')]",
+						"type": "Expression"
+					},
+					"folderPath": "[parameters('adls_vander_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedsvc_datalake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_address')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "southridge_linked_svc",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "AddressID",
+						"type": "Guid"
+					},
+					{
+						"name": "CustomerID",
+						"type": "Guid"
+					},
+					{
+						"name": "AddressLine1",
+						"type": "String"
+					},
+					{
+						"name": "AddressLine2",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "ZipCode",
+						"type": "String"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "Date"
+					},
+					{
+						"name": "UpdatedDate",
+						"type": "Date"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[Addresses]')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/southridge_linked_svc')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_cs_orders')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "southridge_linked_svc",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "OrderID",
+						"type": "Guid"
+					},
+					{
+						"name": "CustomerID",
+						"type": "Guid"
+					},
+					{
+						"name": "OrderDate",
+						"type": "Date"
+					},
+					{
+						"name": "ShipDate",
+						"type": "Date"
+					},
+					{
+						"name": "TotalCost",
+						"type": "Decimal"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "Date"
+					},
+					{
+						"name": "UpdatedDate",
+						"type": "Date"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[Orders]')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/southridge_linked_svc')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_customers')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "southridge_linked_svc",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "CustomerID",
+						"type": "Guid"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					},
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "PhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "Date"
+					},
+					{
+						"name": "UpdatedDate",
+						"type": "Date"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[Customers]')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/southridge_linked_svc')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/southridge_orderdetails')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "southridge_linked_svc",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "OrderDetailID",
+						"type": "Guid"
+					},
+					{
+						"name": "OrderID",
+						"type": "Guid"
+					},
+					{
+						"name": "MovieID",
+						"type": "Guid"
+					},
+					{
+						"name": "Quantity",
+						"type": "Byte"
+					},
+					{
+						"name": "UnitCost",
+						"type": "Decimal"
+					},
+					{
+						"name": "LineNumber",
+						"type": "Byte"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "Date"
+					},
+					{
+						"name": "UpdatedDate",
+						"type": "Date"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[OrderDetails]')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/southridge_linked_svc')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/streaming_address')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "southridge_streaming",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "AddressID",
+						"type": "Guid"
+					},
+					{
+						"name": "CustomerID",
+						"type": "Guid"
+					},
+					{
+						"name": "AddressLine1",
+						"type": "String"
+					},
+					{
+						"name": "AddressLine2",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "ZipCode",
+						"type": "String"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "Date"
+					},
+					{
+						"name": "UpdatedDate",
+						"type": "Date"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[Addresses]')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/southridge_streaming')]"
+			]
+		}
+	]
+}

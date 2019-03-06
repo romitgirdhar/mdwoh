@@ -1,0 +1,223 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "southridgeETL"
+		},
+		"VanderSQL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'VanderSQL'"
+		},
+		"linkedsvc_cosmosdb_movies_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedsvc_cosmosdb_movies'"
+		},
+		"southridge_linked_svc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'southridge_linked_svc'"
+		},
+		"southridge_streaming_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'southridge_streaming'"
+		},
+		"ADLS_Customerdetails_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"ADLS_Customerdetails_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/customer details"
+		},
+		"ADLS_southridge_orders_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"ADLS_southridge_orders_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/orders"
+		},
+		"Movies_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "movies.json"
+		},
+		"Movies_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/movies"
+		},
+		"adls_address_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_address_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/Addresses"
+		},
+		"adls_orderdetails_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_orderdetails_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/order details"
+		},
+		"adls_str_address_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_str_address_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/stream addresses"
+		},
+		"adls_str_customers_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_str_customers_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/stream customers"
+		},
+		"adls_str_transactions_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"adls_str_transactions_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/stream transactions"
+		},
+		"adls_vander_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().DWTableName"
+		},
+		"adls_vander_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "southbridgeraw/raw/vander"
+		},
+		"linkedsvc_datalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlg2team4southridge.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"linkedsvc_cosmosdb_movies_connectionString": {
+						"value": "[parameters('linkedsvc_cosmosdb_movies_connectionString')]"
+					},
+					"southridge_linked_svc_connectionString": {
+						"value": "[parameters('southridge_linked_svc_connectionString')]"
+					},
+					"southridge_streaming_connectionString": {
+						"value": "[parameters('southridge_streaming_connectionString')]"
+					},
+					"linkedsvc_datalake_properties_typeProperties_url": {
+						"value": "[parameters('linkedsvc_datalake_properties_typeProperties_url')]"
+					},
+					"ADLS_Customerdetails_properties_typeProperties_fileName": {
+						"value": "[parameters('ADLS_Customerdetails_properties_typeProperties_fileName')]"
+					},
+					"ADLS_Customerdetails_properties_typeProperties_folderPath": {
+						"value": "[parameters('ADLS_Customerdetails_properties_typeProperties_folderPath')]"
+					},
+					"ADLS_southridge_orders_properties_typeProperties_fileName": {
+						"value": "[parameters('ADLS_southridge_orders_properties_typeProperties_fileName')]"
+					},
+					"ADLS_southridge_orders_properties_typeProperties_folderPath": {
+						"value": "[parameters('ADLS_southridge_orders_properties_typeProperties_folderPath')]"
+					},
+					"Movies_properties_typeProperties_fileName": {
+						"value": "[parameters('Movies_properties_typeProperties_fileName')]"
+					},
+					"Movies_properties_typeProperties_folderPath": {
+						"value": "[parameters('Movies_properties_typeProperties_folderPath')]"
+					},
+					"adls_address_properties_typeProperties_fileName": {
+						"value": "[parameters('adls_address_properties_typeProperties_fileName')]"
+					},
+					"adls_address_properties_typeProperties_folderPath": {
+						"value": "[parameters('adls_address_properties_typeProperties_folderPath')]"
+					},
+					"adls_orderdetails_properties_typeProperties_fileName": {
+						"value": "[parameters('adls_orderdetails_properties_typeProperties_fileName')]"
+					},
+					"adls_orderdetails_properties_typeProperties_folderPath": {
+						"value": "[parameters('adls_orderdetails_properties_typeProperties_folderPath')]"
+					},
+					"adls_str_address_properties_typeProperties_fileName": {
+						"value": "[parameters('adls_str_address_properties_typeProperties_fileName')]"
+					},
+					"adls_str_address_properties_typeProperties_folderPath": {
+						"value": "[parameters('adls_str_address_properties_typeProperties_folderPath')]"
+					},
+					"adls_str_customers_properties_typeProperties_fileName": {
+						"value": "[parameters('adls_str_customers_properties_typeProperties_fileName')]"
+					},
+					"adls_str_customers_properties_typeProperties_folderPath": {
+						"value": "[parameters('adls_str_customers_properties_typeProperties_folderPath')]"
+					},
+					"adls_str_transactions_properties_typeProperties_fileName": {
+						"value": "[parameters('adls_str_transactions_properties_typeProperties_fileName')]"
+					},
+					"adls_str_transactions_properties_typeProperties_folderPath": {
+						"value": "[parameters('adls_str_transactions_properties_typeProperties_folderPath')]"
+					},
+					"adls_vander_properties_typeProperties_fileName": {
+						"value": "[parameters('adls_vander_properties_typeProperties_fileName')]"
+					},
+					"adls_vander_properties_typeProperties_folderPath": {
+						"value": "[parameters('adls_vander_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"VanderSQL_connectionString": {
+						"value": "[parameters('VanderSQL_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		}
+	]
+}
