@@ -1,0 +1,23 @@
+{
+	"name": "MoviesFourthCoffeeRawDataLake",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedsvc_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "",
+			"folderPath": "southbridgeraw/raw/four coffee/movies"
+		}
+	}
+}
