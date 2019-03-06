@@ -1,7 +1,0 @@
-{
-	"name": "FouthCofeeIR",
-	"properties": {
-		"type": "SelfHosted",
-		"description": "Self-Hosted IR for FourthCofee"
-	}
-}
