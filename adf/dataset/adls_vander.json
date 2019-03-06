@@ -18,7 +18,8 @@
 				"rowDelimiter": "",
 				"nullValue": "\\N",
 				"treatEmptyAsNull": true,
-				"skipLineCount": 0
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
 			},
 			"fileName": {
 				"value": "@dataset().DWTableName",
