@@ -18,10 +18,12 @@
 				"rowDelimiter": "",
 				"nullValue": "\\N",
 				"treatEmptyAsNull": true,
-				"skipLineCount": 0,
-				"firstRowAsHeader": true
+				"skipLineCount": 0
 			},
-			"fileName": "",
+			"fileName": {
+				"value": "@dataset().DWTableName",
+				"type": "Expression"
+			},
 			"folderPath": "southbridgeraw/raw/vander"
 		}
 	}
