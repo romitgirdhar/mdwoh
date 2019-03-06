@@ -1,0 +1,28 @@
+{
+	"name": "adls_vander",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedsvc_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DWTableName": {
+				"type": "String"
+			}
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "",
+			"folderPath": "southbridgeraw/raw/vander"
+		}
+	}
+}
