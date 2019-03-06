@@ -1,0 +1,10 @@
+{
+	"name": "Vander_IterateAndCopySQLTables",
+	"properties": {
+		"parameters": {
+			"tableList": {
+				"type": "Array"
+			}
+		}
+	}
+}
