@@ -8,15 +8,43 @@
 		"type": "FileShare",
 		"structure": [
 			{
-				"name": "ActorID",
+				"name": "TransactionID",
 				"type": "String"
 			},
 			{
-				"name": "ActorName",
+				"name": "CustomerID",
 				"type": "String"
 			},
 			{
-				"name": "Gender",
+				"name": "MovieID",
+				"type": "String"
+			},
+			{
+				"name": "RentalDate",
+				"type": "String"
+			},
+			{
+				"name": "ReturnDate",
+				"type": "String"
+			},
+			{
+				"name": "RentalCost",
+				"type": "String"
+			},
+			{
+				"name": "LateFee",
+				"type": "String"
+			},
+			{
+				"name": "RewindFlag",
+				"type": "String"
+			},
+			{
+				"name": "CreatedDate",
+				"type": "String"
+			},
+			{
+				"name": "UpdatedDate",
 				"type": "String"
 			}
 		],
