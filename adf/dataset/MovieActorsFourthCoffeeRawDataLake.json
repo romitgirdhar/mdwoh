@@ -5,6 +5,9 @@
 			"referenceName": "linkedsvc_datalake",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "fourthcoffee"
+		},
 		"type": "AzureBlobFSFile",
 		"typeProperties": {
 			"format": {
