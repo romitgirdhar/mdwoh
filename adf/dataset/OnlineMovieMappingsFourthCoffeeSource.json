@@ -8,15 +8,11 @@
 		"type": "FileShare",
 		"structure": [
 			{
-				"name": "ActorID",
+				"name": "MovieID",
 				"type": "String"
 			},
 			{
-				"name": "ActorName",
-				"type": "String"
-			},
-			{
-				"name": "Gender",
+				"name": "OnlineMovieID",
 				"type": "String"
 			}
 		],
