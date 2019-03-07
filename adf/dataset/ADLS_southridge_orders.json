@@ -5,6 +5,12 @@
 			"referenceName": "linkedsvc_datalake",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"LastRefreshDate": {
+				"type": "String",
+				"defaultValue": "Foo"
+			}
+		},
 		"folder": {
 			"name": "southridge"
 		},
@@ -20,7 +26,10 @@
 				"firstRowAsHeader": true
 			},
 			"fileName": "",
-			"folderPath": "southbridgeraw/orders"
+			"folderPath": {
+				"value": "southbridgeraw/orders/@{dataset().LastRefreshDate}",
+				"type": "Expression"
+			}
 		}
 	}
 }
