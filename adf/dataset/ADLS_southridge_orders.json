@@ -25,7 +25,7 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": true
 			},
-			"fileName": "",
+			"fileName": "Orders.csv",
 			"folderPath": {
 				"value": "southbridgeraw/orders/@{dataset().LastRefreshDate}",
 				"type": "Expression"
