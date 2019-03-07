@@ -14,7 +14,11 @@
 				},
 				"typeProperties": {
 					"source": {
-						"type": "SqlSource"
+						"type": "SqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT * from orders WHERE UpdatedDate > @{pipeline().parameters.LastRefreshDate}",
+							"type": "Expression"
+						}
 					},
 					"sink": {
 						"type": "AzureBlobFSSink",
@@ -66,25 +70,12 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "GetLastRefreshDate",
-				"type": "SetVariable",
-				"typeProperties": {
-					"variableName": "LastRefreshDateVar",
-					"value": "@Pipeline().parameters.LastRefreshDate"
-				}
 			}
 		],
 		"parameters": {
 			"LastRefreshDate": {
 				"type": "String",
 				"defaultValue": "2000-01-01"
-			}
-		},
-		"variables": {
-			"LastRefreshDateVar": {
-				"type": "String"
 			}
 		}
 	}
