@@ -21,8 +21,7 @@
 						}
 					},
 					"sink": {
-						"type": "AzureBlobFSSink",
-						"copyBehavior": "PreserveHierarchy"
+						"type": "AzureBlobFSSink"
 					},
 					"enableStaging": false
 				},
@@ -35,7 +34,13 @@
 				"outputs": [
 					{
 						"referenceName": "ADLS_southridge_orders",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"LastRefreshDate": {
+								"value": "@pipeline().parameters.LastRefreshDate",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
