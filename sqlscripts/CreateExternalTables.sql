@@ -64,3 +64,87 @@ WITH (
     )  
 ;  
 
+
+select top 10 * from ExtAddresses
+select top 10 * from ExtCustomers
+select top 10 * from ExtOrderDetails
+select top 10 * from ExtOrders
+
+
+-- date
+-- customers
+-- location
+-- movies 
+
+
+create table DimDate (
+	DateSK int not null identity(1,1) ,
+	DateValue datetime ,--INDEX IX_DV NONCLUSTERED,
+	DateYear smallint,
+	DateMonth smallint,
+	DateDay  smallint,
+	DateDayOfWeek smallint,
+	DateDayOfYear smallint,
+	DateWeekOfYear smallint
+
+)
+WITH 
+( DISTRIBUTION = HASH(DateValue),
+  CLUSTERED COLUMNSTORE INDEX
+ )
+
+
+ 
+create table DimCustomers (
+	CustomerSK int not null identity(1,1) ,
+	CustomerID uniqueidentifier,
+	LastName nvarchar(100),
+	FirstName nvarchar(100),
+	AddressLine1 nvarchar(100),
+	AddressLine2 nvarchar(100),
+	City nvarchar(100),
+	State nvarchar(2),
+	ZipCode nvarchar(5),
+	PhoneNumber nvarchar(10),
+	RecordStartDate datetime,
+	RecordEndDate datetime,
+	ActiveFlag bit 
+)
+WITH 
+( DISTRIBUTION = HASH(CustomerID),
+  CLUSTERED COLUMNSTORE INDEX
+ )
+
+ create table DimCustomers (
+	CustomerSK int not null identity(1,1) ,
+	CustomerID uniqueidentifier,
+	LastName nvarchar(100),
+	FirstName nvarchar(100),
+	AddressLine1 nvarchar(100),
+	AddressLine2 nvarchar(100),
+	City nvarchar(100),
+	State nvarchar(2),
+	ZipCode nvarchar(5),
+	PhoneNumber nvarchar(10),
+	RecordStartDate datetime,
+	RecordEndDate datetime,
+	ActiveFlag bit 
+)
+WITH 
+( DISTRIBUTION = HASH(CustomerID),
+  CLUSTERED COLUMNSTORE INDEX
+ )
+
+ create table DimMovies (
+	MovieSK int not null identity(1,1) ,
+	MovieID uniqueidentifier,
+	MovieTitle nvarchar(255),
+	MovieRunTimeMin int
+)
+WITH 
+( DISTRIBUTION = HASH(MovieID),
+  CLUSTERED COLUMNSTORE INDEX
+ )
+
+
+
