@@ -66,6 +66,14 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "GetLastRefreshDate",
+				"type": "SetVariable",
+				"typeProperties": {
+					"variableName": "LastRefreshDateVar",
+					"value": "@Pipeline().parameters.LastRefreshDate"
+				}
 			}
 		],
 		"parameters": {
