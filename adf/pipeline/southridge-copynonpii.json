@@ -16,7 +16,7 @@
 					"source": {
 						"type": "SqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * from orders WHERE UpdatedDate > @{pipeline().parameters.LastRefreshDate}",
+							"value": "SELECT * from orders WHERE UpdatedDate > '@{pipeline().parameters.LastRefreshDate}'",
 							"type": "Expression"
 						}
 					},
