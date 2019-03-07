@@ -65,7 +65,17 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Set Variable1",
+				"type": "SetVariable"
 			}
-		]
+		],
+		"parameters": {
+			"LastRefreshDate": {
+				"type": "String",
+				"defaultValue": "'1/1/2000'"
+			}
+		}
 	}
 }
