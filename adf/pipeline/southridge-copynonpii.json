@@ -51,7 +51,8 @@
 				},
 				"typeProperties": {
 					"source": {
-						"type": "SqlSource"
+						"type": "SqlSource",
+						"sqlReaderQuery": "SELECT * from OrderDetails WHERE UpdatedDate > '@{pipeline().parameters.LastRefreshDate}'"
 					},
 					"sink": {
 						"type": "AzureBlobFSSink"
