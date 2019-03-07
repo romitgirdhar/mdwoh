@@ -67,6 +67,17 @@
 					}
 				]
 			}
-		]
+		],
+		"parameters": {
+			"LastRefreshDate": {
+				"type": "String",
+				"defaultValue": "2000-01-01"
+			}
+		},
+		"variables": {
+			"LastRefreshDateVar": {
+				"type": "String"
+			}
+		}
 	}
 }
